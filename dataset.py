@@ -139,9 +139,9 @@ def make_transform(
     return transform
 
 
-class FFHQlmdb(Dataset):
+class FFHQlmdb(Dataset): #make own data set class 
     def __init__(self,
-                 path=os.path.expanduser('datasets/ffhq256.lmdb'),
+                 path=os.path.expanduser('datasets/ffhq256.lmdb'), #change datapath to own uploaded data
                  image_size=256,
                  original_resolution=256,
                  split=None,

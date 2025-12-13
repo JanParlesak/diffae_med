@@ -281,7 +281,7 @@ class TrainConfig(BaseConfig):
         # latent can have different eval T
         return self._make_latent_diffusion_conf(T=self.latent_T_eval)
 
-    def make_dataset(self, path=None, **kwargs):
+    def make_dataset(self, path=None, **kwargs): #change here for new data 
         if self.data_name == 'ffhqlmdb256':
             return FFHQlmdb(path=path or self.data_path,
                             image_size=self.img_size,
