@@ -28,7 +28,7 @@ def ddpm():
     return conf
 
 
-def autoenc_base():
+def autoenc_base(): # this also needs changing probably
     """
     base configuration for all Diff-AE models.
     """
@@ -124,8 +124,8 @@ def ffhq128_ddpm():
 
 def ffhq128_autoenc_base():
     conf = autoenc_base()
-    conf.data_name = 'ffhqlmdb256'
-    conf.scale_up_gpus(4)
+    conf.data_name = 'ffhqlmdb256' # maybe data needs to be changed here 
+    conf.scale_up_gpus(4) #if 4 gpus are available
     conf.img_size = 128
     conf.net_ch = 128
     # final resolution = 8x8
@@ -191,7 +191,7 @@ def ffhq128_ddpm_130M():
     return conf
 
 
-def ffhq128_autoenc_130M():
+def ffhq128_autoenc_130M(): # This can probably stay the same 
     conf = ffhq128_autoenc_base()
     conf.total_samples = 130_000_000
     conf.eval_ema_every_samples = 10_000_000
