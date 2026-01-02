@@ -28,7 +28,7 @@ def ddpm():
     return conf
 
 
-def autoenc_base(): # this also needs changing probably
+def autoenc_base(): # this also needs changing probably 
     """
     base configuration for all Diff-AE models.
     """
@@ -103,7 +103,7 @@ def celeba64d2c_autoenc():
 
 def ffhq128_ddpm():
     conf = ddpm()
-    conf.data_name = 'ffhqlmdb256'
+    conf.data_name = 'ffhqlmdb256' #change data name 
     conf.warmup = 0
     conf.total_samples = 48_000_000
     conf.img_size = 128
@@ -239,6 +239,38 @@ def bedroom128_autoenc():
     conf.name = 'bedroom128_autoenc'
     return conf
 
+def cxr128_autoenc_base():
+    conf = autoenc_base()
+    conf.data_name = 'cxrlmdb256' # maybe data needs to be changed here needs to be provided 
+    conf.scale_up_gpus(4) #if 4 gpus are available
+    conf.img_size = 128
+    conf.net_ch = 128
+    # final resolution = 8x8
+    conf.net_ch_mult = (1, 1, 2, 3, 4)
+    # final resolution = 4x4
+    conf.net_enc_channel_mult = (1, 1, 2, 3, 4, 4)
+    conf.eval_ema_every_samples = 10_000_000
+    conf.eval_every_samples = 10_000_000
+    conf.make_model_conf()
+    return conf
+
+
+def cxr128_autoenc_130M(): # This can probably stay the same 
+    conf = cxr128_autoenc_base
+    conf.total_samples = 130_000_000
+    conf.eval_ema_every_samples = 10_000_000
+    conf.eval_every_samples = 10_000_000
+    conf.name = 'ffhq128_autoenc_130M'
+    return conf
+
+def pretrain_cxr128_autoenc130M():
+    conf = cxr128_autoenc_base()
+    conf.pretrain = PretrainConfig(
+        name='130M',
+        path=f'checkpoints/{cxr128_autoenc_130M().name}/last.ckpt',
+    )
+    conf.latent_infer_path = f'checkpoints/{cxr128_autoenc_130M().name}/latent.pkl'
+    return conf
 
 def pretrain_celeba64d2c_72M():
     conf = celeba64d2c_autoenc()

@@ -92,6 +92,19 @@ def ffhq128_autoenc_latent():
     conf.name = 'ffhq128_autoenc_latent'
     return conf
 
+def cxr128_autoenc_latent():
+    conf = pretrain_cxr128_autoenc130M()
+    conf = latent_diffusion128_config(conf)
+    conf = latent_mlp_2048_norm_10layers(conf)
+    conf = latent_256_batch_size(conf)
+    conf = adamw_weight_decay(conf)
+    conf.total_samples = 101_000_000
+    conf.latent_loss_type = LossType.l1
+    conf.latent_beta_scheduler = 'const0.008'
+    conf.name = 'ffhq128_autoenc_latent'
+    return conf
+
+
 
 def ffhq256_autoenc_latent():
     conf = pretrain_ffhq256_autoenc()

@@ -1,5 +1,12 @@
 
-#change path in dataset file
+# Get data 
+# Convert to lmdb files 
+# resize data
+
+
+######### TRAIN DIFFAE ######################
+
+#change path in dataset file and write own class
 
 @dataclass # make changes in the config file
 class TrainConfig(BaseConfig):
@@ -35,9 +42,9 @@ def autoenc_base(): # this also needs changing probably
     conf.make_model_conf
 
 
-def ffhq128_autoenc_base():
+def cxr128_autoenc_base():
     conf = autoenc_base()
-    conf.data_name = 'ffhqlmdb256' # maybe data needs to be changed here needs to be provided 
+    conf.data_name = 'cxrlmdb256' # maybe data needs to be changed here needs to be provided 
     conf.scale_up_gpus(4) #if 4 gpus are available
     conf.img_size = 128
     conf.net_ch = 128
@@ -51,17 +58,46 @@ def ffhq128_autoenc_base():
     return conf
 
 
-def ffhq128_autoenc_130M(): # This can probably stay the same 
-    conf = ffhq128_autoenc_base()
+def cxr128_autoenc_130M(): # This can probably stay the same 
+    conf = cxr128_autoenc_base
     conf.total_samples = 130_000_000
     conf.eval_ema_every_samples = 10_000_000
     conf.eval_every_samples = 10_000_000
     conf.name = 'ffhq128_autoenc_130M'
     return conf
 
+def pretrain_cxr128_autoenc130M():
+    conf = cxr128_autoenc_base()
+    conf.pretrain = PretrainConfig(
+        name='130M',
+        path=f'checkpoints/{cxr128_autoenc_130M().name}/last.ckpt',
+    )
+    conf.latent_infer_path = f'checkpoints/{cxr128_autoenc_130M().name}/latent.pkl'
+    return conf
 
 
-#### Train DDIM
+
+# in templates latent
+
+def cxr128_autoenc_latent():
+    conf = pretrain_cxr128_autoenc130M()
+    conf = latent_diffusion128_config(conf)
+    conf = latent_mlp_2048_norm_10layers(conf)
+    conf = latent_256_batch_size(conf)
+    conf = adamw_weight_decay(conf)
+    conf.total_samples = 101_000_000
+    conf.latent_loss_type = LossType.l1
+    conf.latent_beta_scheduler = 'const0.008'
+    conf.name = 'ffhq128_autoenc_latent'
+    return conf
+
+#### Train DDIM ######################
+
+# after changing trainconfig just data name sneed to be changed in the files 
+
+############ TRAIN Classifier ###########################
+
+#
 
 
 
