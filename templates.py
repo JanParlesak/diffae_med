@@ -241,7 +241,7 @@ def bedroom128_autoenc():
 
 def cxr128_autoenc_base():
     conf = autoenc_base()
-    conf.data_name = 'cxrlmdb256' # maybe data needs to be changed here needs to be provided 
+    conf.data_name = 'cxr256' # maybe data needs to be changed here needs to be provided 
     conf.scale_up_gpus(4) #if 4 gpus are available
     conf.img_size = 128
     conf.net_ch = 128
@@ -260,16 +260,7 @@ def cxr128_autoenc_130M(): # This can probably stay the same
     conf.total_samples = 130_000_000
     conf.eval_ema_every_samples = 10_000_000
     conf.eval_every_samples = 10_000_000
-    conf.name = 'ffhq128_autoenc_130M'
-    return conf
-
-def pretrain_cxr128_autoenc130M():
-    conf = cxr128_autoenc_base()
-    conf.pretrain = PretrainConfig(
-        name='130M',
-        path=f'checkpoints/{cxr128_autoenc_130M().name}/last.ckpt',
-    )
-    conf.latent_infer_path = f'checkpoints/{cxr128_autoenc_130M().name}/latent.pkl'
+    conf.name = 'cxr128_autoenc_130M'
     return conf
 
 def pretrain_celeba64d2c_72M():
@@ -290,6 +281,15 @@ def pretrain_ffhq128_autoenc72M():
         path=f'checkpoints/{ffhq128_autoenc_72M().name}/last.ckpt',
     )
     conf.latent_infer_path = f'checkpoints/{ffhq128_autoenc_72M().name}/latent.pkl'
+    return conf
+
+def pretrain_cxr128_autoenc130M():
+    conf = cxr128_autoenc_base
+    conf.pretrain = PretrainConfig(
+        name='130M',
+        path=f'checkpoints/{cxr128_autoenc_130M().name}/last.ckpt',
+    )
+    conf.latent_infer_path = f'checkpoints/{cxr128_autoenc_130M().name}/latent.pkl'
     return conf
 
 

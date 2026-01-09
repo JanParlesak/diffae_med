@@ -40,7 +40,7 @@ data_paths = {
     'celeba_relight':
     os.path.expanduser('datasets/celeba_hq_light/celeba_light.txt'),
     'cxr256':
-    os.path.expanduser('datasets/cxr256.lmdb'),
+    os.path.expanduser('datasets/cxr256.lmdb'), #check if this is the same 
     
 }
 
@@ -186,7 +186,7 @@ class TrainConfig(BaseConfig):
     def fid_cache(self):
         # we try to use the local dirs to reduce the load over network drives
         # hopefully, this would reduce the disconnection problems with sshfs
-        return f'{self.work_cache_dir}/eval_images/{self.data_name}_size{self.img_size}_{self.eval_num_images}'
+        return f'{self.work_cache_dir}/eval_images/{self.data_name}_size{self.img_size}_{self.eval_num_images}' # needs adjusting
 
     @property
     def data_path(self):

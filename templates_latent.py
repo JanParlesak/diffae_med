@@ -101,7 +101,7 @@ def cxr128_autoenc_latent():
     conf.total_samples = 101_000_000
     conf.latent_loss_type = LossType.l1
     conf.latent_beta_scheduler = 'const0.008'
-    conf.name = 'ffhq128_autoenc_latent'
+    conf.name = 'cxr128_autoenc_latent'
     return conf
 
 

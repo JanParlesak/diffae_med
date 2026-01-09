@@ -154,13 +154,13 @@ class CXRlmdb(Dataset): #make own data set class
 
         if split is None:
             self.offset = 0
-        elif split == 'train':
-            # last 60k
-            self.length = self.length - 10000
-            self.offset = 10000
         elif split == 'test':
-            # first 10k
-            self.length = 10000
+            # last 6788
+            self.length = self.length - 21715
+            self.offset = 21715
+        elif split == 'train':
+            # first 21715
+            self.length = 21715
             self.offset = 0
         else:
             raise NotImplementedError()
