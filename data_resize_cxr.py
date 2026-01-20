@@ -79,7 +79,7 @@ if __name__ == "__main__":
     out_path = 'datasets/cxr.lmdb'
     in_path = 'datasets/covid_cxr/lsd'
     ext = 'png'
-    size = None
+    size = 128
 
     dataset = ImageFolder(in_path, ext) 
     print('len:', len(dataset))
@@ -100,7 +100,7 @@ if __name__ == "__main__":
             for batch in loader:
                 with env.begin(write=True) as txn:
                     for img in batch:
-                        key = f"{size}-{str(i).zfill(7)}".encode("utf-8")
+                        key = f"{size}-{str(i).zfill(6)}".encode("utf-8")
                         # print(key)
                         txn.put(key, img)
                         i += 1

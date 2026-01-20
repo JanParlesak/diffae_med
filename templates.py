@@ -256,7 +256,7 @@ def cxr128_autoenc_base():
 
 
 def cxr128_autoenc_130M(): # This can probably stay the same 
-    conf = cxr128_autoenc_base
+    conf = cxr128_autoenc_base()
     conf.total_samples = 130_000_000
     conf.eval_ema_every_samples = 10_000_000
     conf.eval_every_samples = 10_000_000
@@ -284,7 +284,7 @@ def pretrain_ffhq128_autoenc72M():
     return conf
 
 def pretrain_cxr128_autoenc130M():
-    conf = cxr128_autoenc_base
+    conf = cxr128_autoenc_base()
     conf.pretrain = PretrainConfig(
         name='130M',
         path=f'checkpoints/{cxr128_autoenc_130M().name}/last.ckpt',

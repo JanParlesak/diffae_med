@@ -9,6 +9,7 @@ datasets/celebahq256.lmdb
 datasets/ffhq
 datasets/ffhq256.lmdb
 datasets/celeba.lmdb
+datasets/cxr.lmdb
 datasets/celeba
 datasets/covid_cxr
 checkpoints

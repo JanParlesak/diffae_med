@@ -18,7 +18,7 @@ class ImageDataset(Dataset):
         self,
         folder,
         image_size,
-        exts=['jpg'],
+        exts= ['png'], #['jpg'],
         do_augment: bool = True,
         do_transform: bool = True,
         do_normalize: bool = True,
@@ -140,16 +140,16 @@ def make_transform(
 
 class CXRlmdb(Dataset): #make own data set class 
     def __init__(self,
-                 path=os.path.expanduser('datasets/cxr256.lmdb'), #change datapath to own uploaded data
-                 image_size=256,
-                 original_resolution=256,
+                 path=os.path.expanduser('datasets/cxr.lmdb'), #change datapath to own uploaded data
+                 image_size=128,
+                 original_resolution=128,
                  split=None,
                  as_tensor: bool = True,
                  do_augment: bool = True,
                  do_normalize: bool = True,
                  **kwargs):
         self.original_resolution = original_resolution
-        self.data = BaseLMDB(path, original_resolution, zfill=5)
+        self.data = BaseLMDB(path, original_resolution, zfill=6)
         self.length = len(self.data)
 
         if split is None:

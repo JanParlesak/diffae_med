@@ -40,7 +40,7 @@ data_paths = {
     'celeba_relight':
     os.path.expanduser('datasets/celeba_hq_light/celeba_light.txt'),
     'cxr256':
-    os.path.expanduser('datasets/cxr256.lmdb'), #check if this is the same 
+    os.path.expanduser('datasets/cxr.lmdb'), #check if this is the same 
     
 }
 
