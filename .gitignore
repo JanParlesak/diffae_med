@@ -12,6 +12,8 @@ datasets/celeba.lmdb
 datasets/cxr.lmdb
 datasets/celeba
 datasets/covid_cxr
+datasets/cxr.lmdb
+datasets/cxr.lmdb/data.mdb
 checkpoints
 
 .ipynb_checkpoints/

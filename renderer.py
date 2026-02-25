@@ -45,6 +45,7 @@ def render_condition(
     model: BeatGANsAutoencModel,
     x_T,
     sampler: Sampler,
+    latent_sampler = None,
     x_start=None,
     cond=None,
 ):

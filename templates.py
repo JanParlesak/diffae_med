@@ -242,7 +242,7 @@ def bedroom128_autoenc():
 def cxr128_autoenc_base():
     conf = autoenc_base()
     conf.data_name = 'cxr256' # maybe data needs to be changed here needs to be provided 
-    conf.scale_up_gpus(4) #if 4 gpus are available
+    conf.scale_up_gpus(1) #if 4 gpus are available
     conf.img_size = 128
     conf.net_ch = 128
     # final resolution = 8x8
